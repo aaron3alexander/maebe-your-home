@@ -237,6 +237,16 @@ app.post('/login', passport.authenticate('local'), (req, res) => {
     });
 });
 
+//Not used but could be in the future for encryption.
+export async function setLoginSession(res, session) {
+    const createdAt = Date.now()
+    // Create a session object with a max age that we can validate later
+    const obj = { ...session, createdAt, maxAge: MAX_AGE }
+    // const token = await Iron.seal(obj, TOKEN_SECRET, Iron.defaults)
+  
+    setTokenCookie(res, obj)
+}
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
