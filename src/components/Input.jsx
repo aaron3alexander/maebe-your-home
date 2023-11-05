@@ -187,7 +187,7 @@ export default function Input() {
   return (
     <div className="h-3/4 w-full flex flex-col items-center">
       <h1 className="text-8xl font-bold text-blue-400 mb-8 mt-8">
-        Loan Calculator
+        Home Calculator
       </h1>
       <div className="flex flex-col justify-around h-96 w-1/2 mb-6 bg-blue-400 rounded-lg p-4 text-white">
         There are 4 major things to focus on when purchasing a home. They are:
@@ -453,6 +453,24 @@ export default function Input() {
                 )}
               </p>
             </div>
+          </div>
+          <div>
+            Resources
+
+            Credit Score Help:
+            https://www.cambridge-credit.org/debt-to-income-ratio/?gad=1&gclid=Cj0KCQjw-pyqBhDmARIsAKd9XIM0SsOWL3uyL-Gb3cQkqIjRELdl6h7mqxV-tMUvU-Kdw3YZAxicHs8aAh35EALw_wcB
+            https://www.nerdwallet.com/article/finance/raise-credit-score-fast
+
+            DTI Help:
+            https://www.fool.com/the-ascent/credit-cards/articles/5-tips-to-lower-your-debt-to-income-ratio/
+            https://www.cambridge-credit.org/debt-to-income-ratio/?gad=1&gclid=Cj0KCQjw-pyqBhDmARIsAKd9XIN-CCIsCqw_etDA7Ubr2p0kg6ExTkF3DyXV9VJ_pSDqNIGGd-Frt1QaAvvUEALw_wcB
+
+            LTV Help:
+            https://wealthfit.com/articles/loan-to-value-ratio/
+            https://www.financestrategists.com/mortgage-broker/loan-to-value-ratio/?gclid=Cj0KCQjw-pyqBhDmARIsAKd9XINuOdKaRNIM19ReWWHZDn7hJKSbG3mmlw0MM46eeXZtBk_RkgwHv5IaAkmxEALw_wcB
+
+
+            If you need even more help! You can talk with our Mae AI or visit Fannie Mae official website{/*make the website word a link to fannie mae*/}
           </div>
         </div>
       )}
