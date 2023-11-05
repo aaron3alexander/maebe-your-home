@@ -23,16 +23,16 @@ export default function Aibot() {
 
     const main = async (chatMsg) => {
         setApiCallFlag(true);
-        const openai = new OpenAI({ apiKey: 'your_key', dangerouslyAllowBrowser: true });
+        const openai = new OpenAI({ apiKey: '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', dangerouslyAllowBrowser: true });
 
         try {
             if (chatMsg.length !== 0) {
-                //let textPrompt = (chatMessages.slice(-1)).map(message => message.content) + " and limit it to 2 sentences";
-                //console.log(textPrompt);
+                let textPrompt = (chatMessages.slice(-1)).map(message => message.content) + " and limit it to 2 sentences";
+                console.log(textPrompt);
                 console.log(chatMsg);
                 const completion = await openai.chat.completions.create({
-                    //messages: chatMessages.map((message) => ({ role: message.role, content: textPrompt})),
-                    messages: chatMsg,
+                    messages: (chatMessages.slice(-1)).map((message) => ({ role: message.role, content: textPrompt})),
+                    //messages: chatMsg,
                     model: 'gpt-3.5-turbo',
                     //max_tokens: maxTokens,
                 });
@@ -56,16 +56,14 @@ export default function Aibot() {
     return (
         <div className="h-3/4 w-1/2 p-3 rounded-lg flex flex-col items-center border-2 border-teal-500">
             <div>
-                <h1>AI Bot: {generatedText}</h1>
-                {/* <p>User: {userInput}</p> */}
                 {chatMessages.map((message, index) => (
                     <div key={index} className={message.role === "user" ? "text-right" : "text-left"}>
-                        <p>{message.content}</p>
+                        <p>User: {message.content}</p>
                     </div>
                 ))}
                 {generatedMsgs.map((message, index) => (
                     <div key={index} className={message.role === "system" ? "text-left" : "text-right"}>
-                        <p>{message.content}</p>
+                        <p>AI Bot: {message.content}</p>
                     </div>
                 ))}
             </div>
