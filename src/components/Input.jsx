@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useRef } from "react";
 import MuiInput from "@mui/material/Input";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -13,12 +14,15 @@ export default function Input() {
   const [studentLoan, setStudentLoan] = useState(0);
   const [creditCard, setCreditCard] = useState(0);
   const [creditScore, setCreditScore] = useState(0);
+
   const sectionRef = useRef(null);
+
 
   const [propertyValue, setPropertyValue] = useState(0);
   const [downpayment, setDownpayment] = useState(0);
   const [loan, setLoan] = useState(0);
   const [interest, setInterest] = useState(0);
+
   const [mortgageLength, setMortgageLength] = useState(0);
   const [monthlyMortgage, setMonthlyMortgage] = useState(0);
   const [isReady, setIsReady] = useState(false);

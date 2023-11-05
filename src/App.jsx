@@ -1,4 +1,5 @@
 import Input from "./components/Input";
+import Aibot from "./components/AIbot";
 import Account from "./components/Account";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -21,6 +22,7 @@ function App() {
             <Route path="/account" element = {<AccountPage />} />
           </Routes>
         </div>
+        <Aibot />
       </div>
     </BrowserRouter>
   );
