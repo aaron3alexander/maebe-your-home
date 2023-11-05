@@ -11,16 +11,30 @@ import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+import { Link, useNavigate } from "react-router-dom";
+
+// const loginLink = "/Login";
+const signupLink = "/Signup";
 
 export default function Account() {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  
+  const handleLogin = () => {
+    // navigate(loginLink)
+  };
+  
+  const handleSignup = () => {
+    // navigate(signupLink)
   };
   
   return (
@@ -74,11 +88,10 @@ export default function Account() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <a rel="stylesheet" href="../" />
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleLogin}>
           <Avatar /> Login
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleSignup}>
           <Avatar /> Signup
         </MenuItem>
         <Divider />
