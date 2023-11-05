@@ -553,7 +553,7 @@ export default function Input() {
         </div>
         
         <p className="text-center mt-2">If you need even more help! You can talk with our Mae AI below or visit
-        Fannie Mae's official website</p>
+        Fannie Mae's official website and check out their home education course!</p>
       </div>
 
       <div className="w-full h-full flex flex-col items-center justify-center mt-8">
