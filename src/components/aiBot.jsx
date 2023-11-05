@@ -1,53 +1,85 @@
 import { useEffect, useState } from "react";
 import OpenAI from "openai";
-import axios from "axios";
-import { useSelect } from "@mui/base";
 
-const apiKey = "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";
-const apiURL = "https://api.openai.com/v1/engines/davinci/completions";
 
 export default function Aibot() {
 
     const [generatedText, setGeneratedText] = useState("");
     const [userInput, setUserInput] = useState("");
+    const [chatMessages, setChatMessages] = useState([]);
+    const [generatedMsgs, setGeneratedMsgs] = useState([]);
+    const [apiCallFlag, setApiCallFlag] = useState(false);
     const maxTokens = 100;
 
-    useEffect(() => {
-        async function main() {
-            const openai = new OpenAI({ apiKey: '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', dangerouslyAllowBrowser: true });
+    const handleInputs = (event) => {
+        setUserInput(event.target.value);
+    }
+    const handleUserMsg = () => {
+        if (userInput) {
+            setChatMessages([...chatMessages, { role: "user", content: userInput }]);
+            setUserInput("");
+        }
+    }
 
-            try {
+    const main = async (chatMsg) => {
+        setApiCallFlag(true);
+        const openai = new OpenAI({ apiKey: 'your_key', dangerouslyAllowBrowser: true });
+
+        try {
+            if (chatMsg.length !== 0) {
+                //let textPrompt = (chatMessages.slice(-1)).map(message => message.content) + " and limit it to 2 sentences";
+                //console.log(textPrompt);
+                console.log(chatMsg);
                 const completion = await openai.chat.completions.create({
-                    messages: [{ role: 'system', content: 'Tell me about mortgage in the United States and limit it to 2 sentences' }],
+                    //messages: chatMessages.map((message) => ({ role: message.role, content: textPrompt})),
+                    messages: chatMsg,
                     model: 'gpt-3.5-turbo',
                     //max_tokens: maxTokens,
                 });
-
                 const response = completion.choices[0].message.content
                 setGeneratedText(response);
-
-            } catch (error) {
-                console.error(error);
+                setGeneratedMsgs([...generatedMsgs, {role: "system", content: response}]);
             }
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setApiCallFlag(false);
         }
+    }  
 
-        main();
-
-    }, []);
+    useEffect(() => {
+        if (!apiCallFlag) {
+            main(chatMessages.slice(-1));
+        }
+    }, [chatMessages, apiCallFlag]);
 
     return (
         <div className="h-3/4 w-1/2 p-3 rounded-lg flex flex-col items-center border-2 border-teal-500">
-            <h1>AI Bot: {generatedText}</h1>
-            <p>User: {userInput}</p>
-            <input
-              className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:border-blue-500"
-              type="string"
-              value={userInput}
-              onChange={(e) => {
-                setUserInput(e.target.value);
-              }}
-            />
-            
+            <div>
+                <h1>AI Bot: {generatedText}</h1>
+                {/* <p>User: {userInput}</p> */}
+                {chatMessages.map((message, index) => (
+                    <div key={index} className={message.role === "user" ? "text-right" : "text-left"}>
+                        <p>{message.content}</p>
+                    </div>
+                ))}
+                {generatedMsgs.map((message, index) => (
+                    <div key={index} className={message.role === "system" ? "text-left" : "text-right"}>
+                        <p>{message.content}</p>
+                    </div>
+                ))}
+            </div>
+
+            <div className="flex items-center" >
+                <input
+                    className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:border-blue-500"
+                    type="string"
+                    placeholder="Enter a Question"
+                    value={userInput}
+                    onChange={handleInputs}
+                />
+                <button onClick={handleUserMsg}>Send</button>
+            </div>
         </div>
     );
 }
