@@ -189,10 +189,12 @@ export default function Input() {
       <h1 className="text-8xl font-bold text-blue-400 mb-8 mt-8">
         Loan Calculator
       </h1>
-      <div className="w-1/2 mb-6 bg-blue-400 rounded-lg p-4 text-white">
-        There are 4 major things to focus on when purchasing a home. They are
-        your credit score, loan to value (LTV) ratio, debt to income (DTI)
-        ratio, and front-end debt to income (FEDT) ratio.
+      <div className="flex flex-col justify-around h-96 w-1/2 mb-6 bg-blue-400 rounded-lg p-4 text-white">
+        There are 4 major things to focus on when purchasing a home. They are:
+        <p> - Your credit score! Credit score is an important aspect that you will always be changing whether you mean to or not. Therefore focusing on improving this value early before attempting to buy a home will increase your odds of your dream home.</p>
+        <p> - Loan amount to value of the home (LTV) ratio! LTV value is determined by how much of a loan you are approved for, and the appraised value of the home you are looking at. If your loan covers more than 80% of the appraised value, buying this home may be possible but you will have to purchase a Private Mortgage Insurance. Which will significatly increase your mortgage depending on how far over 80%.</p>
+        <p> - Debt to income (DTI) ratio! DTI is exactly what it sounds like, take your total debt and divide it by your monthly income. If this value is higher than 36% (45% depending on the loaner), obtaining a loan will be difficult. Having this value below 30% is very helpful! </p>
+        <p> - Finally your front-end debt to income (FEDTI) ratio. FEDTI is similar to DTI but relies solely on the monthly mortgage. Having your monthly mortgage too high compared to your income can be dangerous and mean that you might not be ready for this home. Having this value be over 28% can will put you in the danger zone! </p>
       </div>
 
       <div className="flex  shadow-xl border-black rounded-lg">
