@@ -2,6 +2,10 @@ import Input from "./components/Input";
 import Account from "./components/Account";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
+import AccountPage from "./pages/AccountPage";
+
 function App() {
   return (
     <BrowserRouter>
@@ -13,6 +17,9 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Input />} />
+        <Route path="/login" element = {<LoginPage />} />
+        <Route path="/signup" element = {<SignupPage />} />
+        <Route path="/account" element = {<AccountPage />} />
     </Routes>
     </div>
 
