@@ -89,7 +89,13 @@ export default function Input() {
     let LTV = loan / propertyValue;
     let message = [];
     let isGud = true;
-    console.log("Values: ", DTI <= .36, LEDTI <= .28, LTV <=0.8, creditScore > 640);
+    console.log(
+      "Values: ",
+      DTI <= 0.36,
+      LEDTI <= 0.28,
+      LTV <= 0.8,
+      creditScore > 640
+    );
 
     if (!(creditScore > 640)) {
       isGud = false;
@@ -179,8 +185,8 @@ export default function Input() {
   }
 
   return (
-    <div className="h-3/4 w-2/3 flex flex-col items-center">
-      <h1 className="text-4xl font-bold text-blue-400 mb-8 mt-8">
+    <div className="h-3/4 w-full flex flex-col items-center">
+      <h1 className="text-8xl font-bold text-blue-400 mb-8 mt-8">
         Loan Calculator
       </h1>
       <div className="w-1/2 mb-6 bg-blue-400 rounded-lg p-4 text-white">
@@ -189,7 +195,7 @@ export default function Input() {
         ratio, and front-end debt to income (FEDT) ratio.
       </div>
 
-      <div className="flex border-2 border-black rounded-lg ">
+      <div className="flex  shadow-xl border-black rounded-lg">
         <div className="h-full w-full p-3 rounded-lg flex flex-col items-center bg-blue-400">
           <h1 className="text-white text-2xl text-center">Your Information</h1>
           <hr className="mt-1 border-2 border-white w-2/3 " />
@@ -342,36 +348,109 @@ export default function Input() {
       {isReady && (
         <div
           ref={sectionRef}
-          className="h-full mt-8 bg-blue-100 p-8 w-full rounded-full"
+          className="h-full mt-8 bg-gray-800 p-8 w-2/3 rounded-full"
         >
-          <div className="flex">
+          {passes ? <h1 className="text-4xl text-green-500 font-bold text-center">Congrats Future Homeowner!</h1> : (
+            <h1 className="text-4xl text-red-400 font-bold text-center mb-2 ">Not A Good Idea!</h1>
+          )}
+          <div className="flex justify-evenly">
             {passes ? (
               <img className="h-96" src={greencheckmark} />
             ) : (
               <img className="h-96" src={redx} />
             )}
+            <div className="flex flex-col justify-evenly ml-6 w-1/2">
+              <p>
+                {creditScore > 780 ? (
+                  <h1 className="text-green-500 font-bold">
+                    Awesome! Your credit score is above 780. Keep it up!
+                  </h1>
+                ) : creditScore > 700 ? (
+                  <h1 className="text-green-300 font-bold ">
+                    Sweet! Your credit score is above 700!
+                  </h1>
+                ) : creditScore > 640 ? (
+                  <h1 className="text-yellow-500 font-bold">
+                    Your credit score passes the minimum of 640, but you should try to
+                    increase it!
+                  </h1>
+                ) : (
+                  <h1 className="text-red-700 font-bold">
+                    Your credit score does not pass the minimum score of 640!
+                    Try to improve it!
+                  </h1>
+                )}
+              </p>
 
-            <p>
-              {creditScore > 800 ? (
-                <h1 className="text-green-500 font-bold">
-                  Wow! Your credit score is amaaaazing. Keep it up!
-                </h1>
-              ) : creditScore > 700 ? (
-                <h1 className="text-green-800 font-bold ">
-                  Your credit score is good!
-                </h1>
-              ) : creditScore > 640 ? (
-                <h1 className="text-yellow-700 font-bold">
-                  Your credit score passes the minimum, but you should try to
-                  increase it!
-                </h1>
-              ) : (
-                <h1 className="text-red-700 font-bold">
-                  Your credit score does not pass the minimum score of 640! Try
-                  to improve it!
-                </h1>
-              )}
-            </p>
+              <p>
+                {(monthlyMortgage + studentLoan + carPayment + creditCard) /
+                  income <=
+                0.2 ? (
+                  <h1 className="text-green-500 font-bold">
+                    Awesome! Your debt-to-income (DTI) ratio is less than 20%!
+                    Great job!
+                  </h1>
+                ) : (monthlyMortgage + studentLoan + carPayment + creditCard) /
+                    income <=
+                  0.3 ? (
+                  <h1 className="text-green-300 font-bold ">
+                    Good! Your debt-to-income ratio (DTI) is less than 30%!
+                  </h1>
+                ) : (monthlyMortgage + studentLoan + carPayment + creditCard) /
+                    income <=
+                  0.36 ? (
+                  <h1 className="text-yellow-500 font-bold">
+                    Your debt-to-income ratio (DTI) passes the minimum of 36%,
+                    but you should try to lower it!
+                  </h1>
+                ) : (
+                  <h1 className="text-red-700 font-bold">
+                    Your debt-to-income ratio (DTI) DOES NOT pass the minimum of
+                    36%! Either try to lower your debt or increase your income!
+                  </h1>
+                )}
+              </p>
+
+              <p>
+                {monthlyMortgage / income <= 0.15 ? (
+                  <h1 className="text-green-500 font-bold">
+                    Awesome! Your front-end debt-to-income (FEDTI) ratio is less than 15%!
+                  </h1>
+                ) : monthlyMortgage / income <= 0.2 ? (
+                  <h1 className="text-green-300 font-bold ">
+                    Good! Your front-end debt-to-income (FEDTI) ratio is less than 20%!
+                  </h1>
+                ) : monthlyMortgage / income <= 0.28 ? (
+                  <h1 className="text-yellow-500 font-bold">
+                    Your front-end debt-to-income (FEDTI) ratio passes the minimum of 28%, but you
+                    should try to lower it!
+                  </h1>
+                ) : (
+                  <h1 className="text-red-700 font-bold">
+                    Your front-end debt-to-income (FEDTI) ratio DOES NOT pass the minimum of 28%.
+                    Either try to lower your monthly mortgage payment or increase your income!
+                  </h1>
+                )}
+              </p>
+
+              <p>
+                {(loan / propertyValue) <= .8 ? (
+                  <h1 className="text-green-500 font-bold">
+                    Awesome! Your loan-to-value (LTV) ratio is less than 80%! Your interest rates should be low!
+                  </h1>
+                )  : (loan / propertyValue) <= .95 ? (
+                  <h1 className="text-yellow-500 font-bold">
+                    Your front-end debt-to-income (FEDTI) ratio passes the minimum of 28%, but you
+                    should try to lower it!
+                  </h1>
+                ) : (
+                  <h1 className="text-red-700 font-bold">
+                    Your loan-to-value (LTV) ratio is greater than 80%! This can lead to higher interest rates and require mortgage insurance.
+                    Try to increase the size of your downpayment!
+                  </h1>
+                )}
+              </p>
+            </div>
           </div>
         </div>
       )}
