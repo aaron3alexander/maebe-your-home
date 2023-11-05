@@ -22,8 +22,8 @@ export default function Aibot() {
     }
 
     const main = async (chatMsg) => {
-        setApiCallFlag(true);
-        const openai = new OpenAI({ apiKey: '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', dangerouslyAllowBrowser: true });
+        //setApiCallFlag(true);
+        const openai = new OpenAI({ apiKey: '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', dangerouslyAllowBrowser: true });
 
         try {
             if (chatMsg.length !== 0) {
@@ -42,8 +42,8 @@ export default function Aibot() {
             }
         } catch (error) {
             console.error(error);
-        } finally {
-            setApiCallFlag(false);
+        //} finally {
+        //    setApiCallFlag(false);
         }
     }  
 
@@ -76,7 +76,7 @@ export default function Aibot() {
                     value={userInput}
                     onChange={handleInputs}
                 />
-                <button onClick={handleUserMsg}>Send</button>
+                <button className="ml-8" onClick={handleUserMsg}>Send</button>
             </div>
         </div>
     );
